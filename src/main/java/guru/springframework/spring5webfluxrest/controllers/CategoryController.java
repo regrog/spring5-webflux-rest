@@ -8,21 +8,26 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+/**
+ * Created by jt on 12/24/17.
+ */
 @RestController
 public class CategoryController {
-    private CategoryRepository categoryRepository;
+
+    private final CategoryRepository categoryRepository;
 
     public CategoryController(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 
     @GetMapping("/api/v1/categories")
-    public Flux<Category> list(){
+    Flux<Category> list(){
         return categoryRepository.findAll();
     }
 
     @GetMapping("/api/v1/categories/{id}")
-    public Mono<Category> getById(@PathVariable String id){
+    Mono<Category> getById(@PathVariable String id){
         return categoryRepository.findById(id);
     }
+
 }
